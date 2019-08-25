@@ -1,13 +1,12 @@
-Form {
-    display: flex;
-    flex-direction: column;
-    /* width: 80%; */
-    max-width: 15px;
-    margin: 30px auto;
-    padding: 15px;
-
+form {
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+  max-width: 100px;
+  margin: 30px auto;
+  padding: 15px;
 }
 
 input {
-    margin: 10px 0;
+  margin: 10px 0;
 }
