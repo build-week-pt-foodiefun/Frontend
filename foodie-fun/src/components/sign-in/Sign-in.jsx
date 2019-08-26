@@ -21,6 +21,7 @@ const SignIn = (props) => {
     return (
         <div>
             <Form>
+                <label>Sign In</label>
                 
                 {touched.username && errors.username && <p className="error">{errors.username}</p> }
                 <label>
@@ -51,7 +52,7 @@ const FormikForm = withFormik({
     },
     validationSchema: yup.object().shape({
         username: yup.string()
-        .required('Please enter you username.'),
+        .required('Please enter your username.'),
         password: yup.string()
         .required('You password is required.')
     }),
