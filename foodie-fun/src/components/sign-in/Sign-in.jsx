@@ -3,11 +3,13 @@ import {Form, Field, withFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
 import './sign-in.styles.css'
+import styled from 'styled-components'
+
 
 
 
 const SignIn = (props) => {
-    console.log(props)
+    // console.log(props)
     // data submit into component
     // const [users, setUsers] = useState([])
     const { values, touched, errors, status } = props
@@ -58,8 +60,9 @@ const FormikForm = withFormik({
     }),
     handleSubmit: (values, { setStatus,resetForm }) => {
         console.log('request')
-        axios.post('https://reqres.in/api/users', values)
+        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values)
         .then(res => {
+            localStorage.setItem("token", res.data.token)
         console.log(res);
         setStatus(res);
         resetForm();            

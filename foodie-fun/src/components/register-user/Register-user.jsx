@@ -5,11 +5,12 @@ import axios from 'axios'
 
 
 const RegisterUser = (props) => {
-    console.log(props)
+    // console.log(props)
 
     const [regUsers, setRegUser] = useState([])
 
     const { values, touched, errors, status} = props
+
     useEffect(() => {
         if(status) {
             setRegUser([...regUsers, status])
@@ -33,11 +34,11 @@ const RegisterUser = (props) => {
         <Field type="password" name="password" placeholder="password" />
         </label>
 
-        {touched.tos && errors.tos && <p className="error">{errors.tos}</p>}        
+        {/* {touched.tos && errors.tos && <p className="error">{errors.tos}</p>}        
             <label>
             <Field type="checkbox" name='tos'/>
             Agree to TOS 
-            </label>
+            </label> */}
 
         {/* <label>
             Email: 
@@ -59,7 +60,7 @@ const FormikForm = withFormik({
         return {
             username: username || '',
             password: password || '',
-            tos: tos || false,
+            // tos: tos || false,
         }
     },
     validationSchema: yup.object().shape({
@@ -67,12 +68,12 @@ const FormikForm = withFormik({
         .required('Please enter your username'),
         password: yup.string()
         .required('You password is required.'),
-        tos: yup.boolean()
-        .oneOf([true], "You gotta")
-        .required()
+        // tos: yup.boolean()
+        // .oneOf([true], "You gotta")
+        // .required()
     }),
     handleSubmit: (values, {resetForm, setStatus, setErros}) => {
-        axios.post('https://reqres.in/api/users', values)
+        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/register', values)
         .then(res => {
             setStatus(res);
             resetForm();

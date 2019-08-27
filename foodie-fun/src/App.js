@@ -12,9 +12,9 @@ function App() {
 
   return (
     <div className='App'>
-    <RegisterUser />
+    {/* <RegisterUser /> */}
 
-      {/* <SignIn addUser={addUser} /> */}
+      <SignIn addUser={addUser} />
       {users.map(user => (
         <div key={user.id}>
            <p>Username: {user.username}</p>
