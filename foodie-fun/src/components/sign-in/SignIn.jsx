@@ -2,44 +2,51 @@ import React, {useState, useEffect} from 'react'
 import {Form, Field, withFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
-import './sign-in.styles.css'
+import './SignIn.styles.css'
+
+import RegisterUser from '../register-user/RegisterUser.jsx'
+import { Link, Route } from 'react-router-dom'
 import styled from 'styled-components'
+import { Button, Form as Forms, Header} from 'semantic-ui-react'
 
 
 
 
 const SignIn = (props) => {
     // console.log(props)
-    // data submit into component
-    // const [users, setUsers] = useState([])
-    const { values, touched, errors, status } = props
-    useEffect(() => {        
-        if(status){
-        props.addUser(status)
-            // setUsers([...users, status])
-        }
-    }, [status])
+
+    const { values, touched, errors } = props
+
+
 
     return (
         <div>
-            <Form>
-                <label>Sign In</label>
-                
-                {touched.username && errors.username && <p className="error">{errors.username}</p> }
-                <label>
-                    Username: 
-                    <Field type="text" name="username" placeholder="username" />
-                </label>
+            <form>
+                <Forms>
+                <Header as='h3'>Sign In</Header>
 
+                <Forms.Field>                    
+                {touched.username && errors.username && <p className="error">{errors.username}</p> }
+                <label>Username:</label>
+                    <Field type="text" name="username" placeholder="username" />
+                </Forms.Field>
+
+
+                <Forms.Field>
                 {touched.password && errors.password && <p className="error">{errors.password}</p> }
-                <label>
-                    Password: 
+                <label>Password:</label>
+                    
                     <Field type="password" name="password" placeholder="password"/>
-                </label>
-                <button type="submit">Submit</button>
-                {/* {users.map(user => <div key={user.id}>{JSON.stringify(user)}</div> )} */}
-            
-            </Form>
+                </Forms.Field>
+
+                <Button basic color="green" className="button" type="submit">Login</Button>
+                {/* <Button basic color="orange" className="button2" type="submit">Sign me up!</Button> */}
+                           
+                {/* <Route exact path='/registeruser' render={props => <RegisterUser {...props} />}></Route> */}
+                <Link exact to="/registeruser">New user?</Link>
+
+                </Forms>
+            </form>
         </div>
     )
 };
@@ -60,7 +67,7 @@ const FormikForm = withFormik({
     }),
     handleSubmit: (values, { setStatus,resetForm }) => {
         console.log('request')
-        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values)
+        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values) 
         .then(res => {
             localStorage.setItem("token", res.data.token)
         console.log(res);

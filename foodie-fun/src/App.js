@@ -1,29 +1,32 @@
 import React, {useState} from 'react';
-import './App.css';
+// import './App.css';
+// import '../src/';
 
-import SignIn from './components/sign-in/Sign-in.jsx'
-import RegisterUser from './components/register-user/Register-user.jsx'
+import { Route, Link } from 'react-router-dom';
+
+import AppRouter from './components/AppRouter'
+// import SignIn from './components/sign-in/SignIn.jsx'
+// import RegisterUser from './components/register-user/RegisterUser.jsx/index.js'
+import TabNav from './components/TabNav';
 
 function App() {
-  const [users, setUsers] = useState([])
-  const addUser = user => {
-    setUsers([...users, user])
-  }
 
   return (
     <div className='App'>
+      <main>
+        {/* <SignIn /> */}
+        <TabNav />
+        <AppRouter />
+
+      </main>
     {/* <RegisterUser /> */}
 
-      <SignIn addUser={addUser} />
-      {users.map(user => (
-        <div key={user.id}>
-           <p>Username: {user.username}</p>
-           <p>Password: {user.password}</p>
-          {/* {JSON.stringify(user)} */}
+      {/* <SignIn /> */}
+    
+    {/* <Route path='/sign-in' component={SignIn}/> */}
+    
+    {/* <Link to='/sign-in'></Link> */}
 
-        </div>
-      
-      ))}
 
     </div>
   );
