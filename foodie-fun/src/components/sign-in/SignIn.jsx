@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Form, Field, withFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
@@ -14,7 +14,23 @@ import { Button, Form as Forms, Header} from 'semantic-ui-react'
 const SignIn = (props) => {
     // console.log(props)
 
-    const { touched, errors } = props
+    const { values, status, touched, errors, history } = props
+
+    useEffect(() => {
+        if (status){
+            console.log('request')
+            axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values, {headers: {authorization: localStorage.getItem('token')}}) 
+            .then(res => {
+                localStorage.setItem("token", res.data.token)
+            console.log(res);
+            history.push('/restaurantcard')
+         
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
+    }, [status])
 
 
 
@@ -39,9 +55,9 @@ const SignIn = (props) => {
                 </Forms.Field>
 
                {/* <Route path="/"  */}
-               {/* <Link to="/WelcomPage.js"> */}
+             
                 <Button basic color="green" className="button" type="submit">Login</Button>
-                {/* </Link> */}
+       
 
                            
                 <Link to="/registeruser">New user?</Link>
@@ -68,17 +84,14 @@ const FormikForm = withFormik({
     }),
     handleSubmit: (values, { setStatus,resetForm }) => {
         console.log('request')
-        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values, {headers: {authorization: localStorage.getItem('token')}}) 
-        .then(res => {
-            localStorage.setItem("token", res.data.token)
-        console.log(res);
-        setStatus(res);
+        // axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values, {headers: {authorization: localStorage.getItem('token')}}) 
+        // .then(res => {
+        //     localStorage.setItem("token", res.data.token)
+        console.log(values);
+        setStatus(values);
         resetForm();            
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
+        }
+
 })(SignIn)
 
 export default FormikForm;
