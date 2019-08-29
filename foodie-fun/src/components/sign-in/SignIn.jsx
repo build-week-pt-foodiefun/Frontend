@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {Form, Field, withFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
 import './SignIn.styles.css'
 
-import RegisterUser from '../register-user/RegisterUser.jsx'
-import { Link, Route } from 'react-router-dom'
-import styled from 'styled-components'
+
+import { Link } from 'react-router-dom'
 import { Button, Form as Forms, Header} from 'semantic-ui-react'
 
 
@@ -15,13 +14,13 @@ import { Button, Form as Forms, Header} from 'semantic-ui-react'
 const SignIn = (props) => {
     // console.log(props)
 
-    const { values, touched, errors } = props
+    const { touched, errors } = props
 
 
 
     return (
-        <div>
-            <form>
+        <div >
+            <Form className="container">
                 <Forms>
                 <Header as='h3'>Sign In</Header>
 
@@ -39,14 +38,16 @@ const SignIn = (props) => {
                     <Field type="password" name="password" placeholder="password"/>
                 </Forms.Field>
 
+               {/* <Route path="/"  */}
+               {/* <Link to="/WelcomPage.js"> */}
                 <Button basic color="green" className="button" type="submit">Login</Button>
-                {/* <Button basic color="orange" className="button2" type="submit">Sign me up!</Button> */}
+                {/* </Link> */}
+
                            
-                {/* <Route exact path='/registeruser' render={props => <RegisterUser {...props} />}></Route> */}
-                <Link exact to="/registeruser">New user?</Link>
+                <Link to="/registeruser">New user?</Link>
 
                 </Forms>
-            </form>
+            </Form>
         </div>
     )
 };
@@ -67,7 +68,7 @@ const FormikForm = withFormik({
     }),
     handleSubmit: (values, { setStatus,resetForm }) => {
         console.log('request')
-        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values) 
+        axios.post('https://backend-foodie-fun.herokuapp.com/api/auth/login', values, {headers: {authorization: localStorage.getItem('token')}}) 
         .then(res => {
             localStorage.setItem("token", res.data.token)
         console.log(res);

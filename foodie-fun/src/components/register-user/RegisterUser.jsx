@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Form, Field, withFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
-
-import {Link} from "react-router-dom";
 
 import './RegisterUser.styles.css';
 import { Button, Form as Forms, Header } from 'semantic-ui-react';
 
 const RegisterUser = props => {
   // console.log(props)
-  const { values, touched, errors, status } = props;
+  const { touched, errors } = props;
 
   return (
     <div>
@@ -43,17 +41,13 @@ const FormikForm = withFormik({
     return {
       username: username || '',
       password: password || ''
-      // tos: tos || false,
     };
   },
   validationSchema: yup.object().shape({
     username: yup.string().required('Please enter your username'),
     password: yup.string().required('You password is required.')
-    // tos: yup.boolean()
-    // .oneOf([true], "You gotta")
-    // .required()
   }),
-  handleSubmit: (values, { resetForm, setStatus, setErros }) => {
+  handleSubmit: (values, { resetForm, setStatus }) => {
     axios
       .post(
         'https://backend-foodie-fun.herokuapp.com/api/auth/register',
