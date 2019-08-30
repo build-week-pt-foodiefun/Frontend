@@ -2,13 +2,11 @@ import React, {useEffect} from 'react'
 import {Form, Field, withFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
+
 import './SignIn.styles.css'
 
-
 import { Link } from 'react-router-dom'
-import { Button, Form as Forms, Header} from 'semantic-ui-react'
-
-
+import { Button, Form as FormA, Header} from 'semantic-ui-react'
 
 
 const SignIn = (props) => {
@@ -37,32 +35,30 @@ const SignIn = (props) => {
     return (
         <div >
             <Form className="container">
-                <Forms>
+                <FormA className="form">
                 <Header as='h3'>Sign In</Header>
 
-                <Forms.Field>                    
+                <FormA.Field>                    
                 {touched.username && errors.username && <p className="error">{errors.username}</p> }
                 <label>Username:</label>
                     <Field type="text" name="username" placeholder="username" />
-                </Forms.Field>
+                </FormA.Field>
 
 
-                <Forms.Field>
+                <FormA.Field>
                 {touched.password && errors.password && <p className="error">{errors.password}</p> }
                 <label>Password:</label>
                     
                     <Field type="password" name="password" placeholder="password"/>
-                </Forms.Field>
+                </FormA.Field>
 
                {/* <Route path="/"  */}
              
                 <Button basic color="green" className="button" type="submit">Login</Button>
-       
-
-                           
+                                           
                 <Link to="/registeruser">New user?</Link>
 
-                </Forms>
+                </FormA>
             </Form>
         </div>
     )

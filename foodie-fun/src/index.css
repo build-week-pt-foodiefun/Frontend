@@ -17,6 +17,12 @@ code {
   /* text-align: center; */
 }
 
+.grid-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: 40vh;
+}
 /* main {
   width: 85vw;
   min-height: 80vh;

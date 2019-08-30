@@ -8,16 +8,19 @@ main {
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
+.container {  
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column; 
+  align-items: center;  
+  margin-top: 50px;
+}
+
 form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-  
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column; 
-    align-items: center;
   }
   
   label {
