@@ -9,7 +9,7 @@ import axios from 'axios'
 const RestaurantCard = (props) => {
     console.log(props)
 
-    const { errors, touched } = props 
+    const { errors, touched, status } = props 
 
 
 
