@@ -8,7 +8,7 @@ import './RegisterUser.styles.css';
 import { Button, Form as FormA, Header } from 'semantic-ui-react';
 
 const RegisterUser = props => {
-  // console.log(props)
+
   const { touched, errors } = props;
 
   return (

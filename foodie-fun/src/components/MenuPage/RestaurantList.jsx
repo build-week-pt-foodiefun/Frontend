@@ -1,37 +1,36 @@
-import React,{ useState, useEffect } from 'react'
-import {Form, Field, withFormik} from 'formik'
-import * as yup from 'yup'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
-import {Link} from 'react-router-dom';
-import {Button, Form as Froms, Header } from 'semantic-ui-react';
-
 const RestaurantList = (props) => {
-const [restaurant, setrestaurant] = useState([])
-
-const { values } = props
+console.log(props)
 
 
+const { restaurant } = props
 
-useEffect(() => {
-    axios
-    .post("https://backend-foodie-fun.herokuapp.com/api/meals", values, {headers: {authorization: localStorage.getItem('token')}})
-    .then(res => {
-        localStorage.setItem('token', res.data.token)
-        console.log(res)
-    })
-})
-.catch(error => {
-    console.log(error)
-}, [])
+const [listMeals, setListMeals] = useState()
     
-    return (
+useEffect(() => {
+    axios.get("https://backend-foodie-fun.herokuapp.com/api/meals/", {headers: {Authorization: localStorage.getItem("token")}})
+    .then(res => {
+        setListMeals(res.data)
+    })
+
+}, [])
+    if(!listMeals) return <div>loading</div>
+
+
+return (
         <div>
+            {listMeals.map(listMeal => (
+            <div>
+                <div>{listMeal.restaurant_name}</div>
+            <div>{listMeal.restaurant_type}</div>
+            <div>{listMeal.item_name}</div>    
+            </div>
+            ))}
             
         </div>
     )
 }
 
-const RestaurantListPage = withFormik({})(RestaurantList)
-
-export default RestaurantListPage
+export default RestaurantList;

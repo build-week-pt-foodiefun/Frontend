@@ -10,7 +10,6 @@ import { Button, Form as FormA, Header} from 'semantic-ui-react'
 
 
 const SignIn = (props) => {
-    // console.log(props)
 
     const { values, status, touched, errors, history } = props
 
@@ -21,7 +20,7 @@ const SignIn = (props) => {
             .then(res => {
                 localStorage.setItem("token", res.data.token)
             console.log(res);
-            history.push('/restaurantcard')
+            history.push('/restaurantform')
          
             })
             .catch(error => {
@@ -29,8 +28,6 @@ const SignIn = (props) => {
             })
         }
     }, [status])
-
-
 
     return (
         <div >
@@ -44,18 +41,14 @@ const SignIn = (props) => {
                     <Field type="text" name="username" placeholder="username" />
                 </FormA.Field>
 
-
                 <FormA.Field>
                 {touched.password && errors.password && <p className="error">{errors.password}</p> }
-                <label>Password:</label>
-                    
+                <label>Password:</label>                    
                     <Field type="password" name="password" placeholder="password"/>
                 </FormA.Field>
-
-               {/* <Route path="/"  */}
              
                 <Button basic color="green" className="button" type="submit">Login</Button>
-                                           
+
                 <Link to="/registeruser">New user?</Link>
 
                 </FormA>
